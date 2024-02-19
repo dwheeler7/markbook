@@ -22,6 +22,8 @@ function jsonBookmarks (_, res) {
 async function index(req, res, next) {
     try {
         //
+    } catch (error) {
+        
     }
 }
 
