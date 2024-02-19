@@ -1,9 +1,8 @@
 import {useState, useEffect} from "react"
-import {useParams} from "react-router-dom"
+import {Form, useParams} from "react-router-dom"
 
 export default function Edit (props) {
   const params = useParams()
-  console.log(params.id)
 //   const symbol = params.symbol.toUpperCase()
   // Using the other two variables to create our URL
   const url = `/api/bookmarks/${params.id}`
@@ -33,7 +32,7 @@ export default function Edit (props) {
       <div>
         <h1>
           {bookmark.title}
-        </h1>        
+        </h1>                
       </div>
     )
   }
