@@ -42,8 +42,6 @@ async function destroy(req ,res,next) {
 }
 
 // update
-
-
 async function update(req ,res,next) {
     try {
         const bookmark = await Bookmark.findByIdAndUpdate(req.params.id, req.body, { new: true })
