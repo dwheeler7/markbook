@@ -6,6 +6,7 @@ module.exports = {
     create,   
     destroy,
     update,
+    show,
     jsonBookmarks,
     jsonBookmark
 }
@@ -57,6 +58,17 @@ async function create(req, res, next){
     try {
         const bookmark = await Bookmark.create(req.body)        
         res.locals.data.bookmark = bookmark
+        next()
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
+    }
+}
+
+// show
+async function show(req, res, next) {
+    try {
+        const foundBookMark = await Bookmark.findOne({ _id: req.params.id })
+        res.locals.data.bookmark = foundBookMark
         next()
     } catch (error) {
         res.status(400).json({ msg: error.message })

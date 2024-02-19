@@ -1,9 +1,10 @@
 import React from "react"
 import {useState, useEffect} from "react"
+import { Link } from "react-router-dom"
 import styles from "./BookmarkList.module.scss"
 
 
-const bookmarkList = (props) =>  {
+const BookmarkList = (props) =>  {
   
     const [bookmarks, setBookmarks] = useState([])
     
@@ -22,31 +23,23 @@ const bookmarkList = (props) =>  {
         getBookmarks()
     }, [])
 
-    const loaded = () => {
-        return (           
-            <div>   
-                <ul>
-                    {
-                        bookmarks.map((bookmark, index) => {
-                            const { title, url } = bookmark
-                            return (
-                                <li key={index}>
-                                    <a href={url} target="_blank">{title}</a>
-                                </li>
-                            )
-                        })
-                    }
-                </ul>             
-            </div>
-        )
-    }
-
-    const loading = () => {
-        return <p>Loading bookmarks...</p>
-    }
-
-    return bookmarks ? loaded() : loading()
-    
+    return (           
+        <div>   
+            <ul>
+                {
+                    bookmarks.map((bookmark, index) => {
+                        const { title, url, _id } = bookmark
+                        return (
+                            <li key={title}>
+                                <a href={url} target="_blank">{title}</a>
+                                <Link to={`/controllers/edit/${bookmark._id}`}>Edit</Link>
+                            </li>
+                        )
+                    })
+                }
+            </ul>             
+        </div>
+    )
 }
 
-export default bookmarkList
+export default BookmarkList

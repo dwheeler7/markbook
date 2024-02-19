@@ -11,19 +11,25 @@
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ App)
 /* harmony export */ });
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _pages_Main_Main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pages/Main/Main */ "./src/pages/Main/Main.js");
-/* harmony import */ var _components_Nav_Nav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Nav/Nav */ "./src/components/Nav/Nav.js");
+/* harmony import */ var _pages_Edit_Edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages/Edit/Edit */ "./src/pages/Edit/Edit.js");
+/* harmony import */ var _components_Nav_Nav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Nav/Nav */ "./src/components/Nav/Nav.js");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
+
+// import New from './pages/New/New'
 
 
 function App() {
   return /*#__PURE__*/React.createElement("div", {
     className: "App"
-  }, /*#__PURE__*/React.createElement(_components_Nav_Nav__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Routes, null, /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Route, {
+  }, /*#__PURE__*/React.createElement(_components_Nav_Nav__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Routes, null, /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
     path: "/",
     element: /*#__PURE__*/React.createElement(_pages_Main_Main__WEBPACK_IMPORTED_MODULE_0__["default"], null)
+  }), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
+    path: "/controllers/edit/:id",
+    element: /*#__PURE__*/React.createElement(_pages_Edit_Edit__WEBPACK_IMPORTED_MODULE_1__["default"], null)
   })));
 }
 
@@ -40,11 +46,13 @@ function App() {
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _BookmarkList_module_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BookmarkList.module.scss */ "./src/components/BookmarkList/BookmarkList.module.scss");
 
 
 
-const bookmarkList = props => {
+
+const BookmarkList = props => {
   const [bookmarks, setBookmarks] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
 
   // Save bookmarks array
@@ -60,26 +68,23 @@ const bookmarkList = props => {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     getBookmarks();
   }, []);
-  const loaded = () => {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, bookmarks.map((bookmark, index) => {
-      const {
-        title,
-        url
-      } = bookmark;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-        key: index
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-        href: url,
-        target: "_blank"
-      }, title));
-    })));
-  };
-  const loading = () => {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Loading bookmarks...");
-  };
-  return bookmarks ? loaded() : loading();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, bookmarks.map((bookmark, index) => {
+    const {
+      title,
+      url,
+      _id
+    } = bookmark;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+      key: title
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: url,
+      target: "_blank"
+    }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      to: "/controllers/edit/".concat(bookmark._id)
+    }, "Edit"));
+  })));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (bookmarkList);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BookmarkList);
 
 /***/ }),
 
@@ -126,6 +131,63 @@ const Nav = props => {
 
 const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(document.getElementById("app"));
 root.render( /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, null, /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.BrowserRouter, null, /*#__PURE__*/React.createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"], null))));
+
+/***/ }),
+
+/***/ "./src/pages/Edit/Edit.js":
+/*!********************************!*\
+  !*** ./src/pages/Edit/Edit.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Edit)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+function Edit(props) {
+  const params = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useParams)();
+  console.log(params.id);
+  //   const symbol = params.symbol.toUpperCase()
+  // Using the other two variables to create our URL
+  const url = "/api/bookmarks/".concat(params.id);
+
+  //state to hold the bookmark data
+  const [bookmark, setBookmark] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
+
+  //function to fetch coin data
+  const getBookmark = async () => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setBookmark(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // useEffect to run getCoin when component mounts
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    getBookmark();
+  }, []);
+
+  // loaded function for when data is fetched
+  const loaded = () => {
+    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, bookmark.title));
+  };
+
+  // Function for when data doesn't exist
+  const loading = () => {
+    return /*#__PURE__*/React.createElement("h1", null, "Loading...");
+  };
+
+  // if coin has data, run the loaded function, otherwise, run loading
+  return bookmark ? loaded() : loading();
+}
 
 /***/ }),
 
