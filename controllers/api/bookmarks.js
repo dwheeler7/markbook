@@ -21,9 +21,11 @@ function jsonBookmarks (_, res) {
 // index
 async function index(req, res, next) {
     try {
-        //
+        const bookmarks = await Bookmark.find()
+        res.locals.data.bookmarks = bookmarks
+        next()        
     } catch (error) {
-        
+        res.status(400).json({ msg: error.message })
     }
 }
 
@@ -31,8 +33,8 @@ async function index(req, res, next) {
 
 async function destroy(req ,res,next) {
     try {
-        const todo = await Todo.findByIdAndDelete(req.params.id)
-        res.locals.data.todo = todo
+        const bookmark = await Bookmark.findByIdAndDelete(req.params.id)
+        res.locals.data.bookmark = bookmark
         next()
     } catch (error) {
         res.status(400).json({ msg: error.message })
@@ -44,8 +46,8 @@ async function destroy(req ,res,next) {
 
 async function update(req ,res,next) {
     try {
-        const todo = await Todo.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        res.locals.data.todo = todo
+        const bookmark = await Bookmark.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        res.locals.data.bookmark = bookmark
         next()
     } catch (error) {
         res.status(400).json({ msg: error.message })
@@ -55,9 +57,8 @@ async function update(req ,res,next) {
 // create
 async function create(req, res, next){
     try {
-        const todo = await Todo.create(req.body)
-        console.log(todo)
-        res.locals.data.todo = todo
+        const bookmark = await Bookmark.create(req.body)        
+        res.locals.data.bookmark = bookmark
         next()
     } catch (error) {
         res.status(400).json({ msg: error.message })
