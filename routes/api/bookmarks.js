@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const todoCtrl = require('../../controllers/api/todos')
+const bookmarkCtrl = require('../../controllers/api/bookmarks')
 
 // Index incomplete
 router.get('/', todoCtrl.indexNotComplete, todoCtrl.jsonTodos)
