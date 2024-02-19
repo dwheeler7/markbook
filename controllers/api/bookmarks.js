@@ -45,7 +45,7 @@ async function destroy(req ,res,next) {
 // update
 async function update(req ,res,next) {
     try {
-        const bookmark = await Bookmark.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        const bookmark = await Bookmark.findByIdAndUpdate(req.params.id, req.body, {runValidators: true, new: true})
         res.locals.data.bookmark = bookmark
         next()
     } catch (error) {

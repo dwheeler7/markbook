@@ -1,16 +1,13 @@
 import {useState, useEffect} from "react"
-import {Form, useParams} from "react-router-dom"
+import {useParams} from "react-router-dom"
+import EditForm from '../../components/forms/EditForm/EditForm'
 
 export default function Edit (props) {
   const params = useParams()
-//   const symbol = params.symbol.toUpperCase()
-  // Using the other two variables to create our URL
   const url = `/api/bookmarks/${params.id}`
 
-  //state to hold the bookmark data
   const [bookmark, setBookmark] = useState()
 
-  //function to fetch coin data
   const getBookmark = async () => {
     try{
         const response = await fetch(url)
@@ -19,20 +16,22 @@ export default function Edit (props) {
     }catch(error){
         console.error(error)
     }   
-  };
-
-  // useEffect to run getCoin when component mounts
+  }
+  
   useEffect(() => {
     getBookmark()
   }, [])
-
-  // loaded function for when data is fetched
+  
   const loaded = () => {
     return (
       <div>
         <h1>
           {bookmark.title}
-        </h1>                
+        </h1>       
+        <EditForm
+            bookmark={bookmark}
+        />
+        
       </div>
     )
   }
