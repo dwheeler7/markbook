@@ -1,10 +1,23 @@
-import React from "react"
+import React from 'react'
 import {useState, useEffect} from "react"
 import { Link } from "react-router-dom"
+import styles from "./Main.module.scss"
 
 const Main = (props) =>  {
   
     const [bookmarks, setBookmarks] = useState()
+
+    const deleteBookmark = async bookmarkId => {
+        try {            
+            const response = await fetch(`/api/bookmarks/${bookmarkId}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' }            
+            })   
+            if (response.ok) getBookmarks()
+        } catch(error) {
+            console.error(error)
+        }   
+    }
     
     // Save bookmarks array
     async function getBookmarks() {
@@ -23,21 +36,31 @@ const Main = (props) =>  {
 
     const loaded = () => { 
         return (           
-            <>
-            <Link to='/new'>Add a bookmark</Link>   
-                <ul>
+            <>  
+                <table className={styles.bookmarkTable}>
+                    <thead>
+                        <tr>
+                            <th colSpan={3}>Bookmark</th>
+                        </tr>                        
+                    </thead>
+                    <tbody>
                     {
                         bookmarks.map((bookmark, index) => {
                             const { title, url, _id } = bookmark
                             return (
-                                <li key={title}>
-                                    <a href={url} target="_blank">{title}</a>
-                                    <Link to={`/controllers/${bookmark._id}/edit`}>Edit</Link>
-                                </li>
+                                <tr key={title}>
+                                    <td><a href={url} target="_blank">{title}</a></td>
+                                    <td><Link to={`/controllers/${bookmark._id}/edit`} rel="noopener noreferrer">Edit</Link></td>
+                                    <td><button onClick={() => deleteBookmark(bookmark._id)}>Delete</button></td>                                                                    
+                                </tr>
+                                
                             )
                         })
                     }
-                </ul>             
+
+                    </tbody>
+                </table>    
+                <Link to='/new'>Add a bookmark</Link>                        
             </>
         )
     }

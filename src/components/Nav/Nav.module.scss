@@ -1,0 +1,21 @@
+.nav {
+    max-width: 250px;
+    
+    .nav__item {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #101828;
+        font-weight: 600;
+        font-size: 1.2rem;
+        grid-gap: .5rem;
+        padding: 25px;
+    
+    }
+
+    .nav__logo {
+        width: 25px;
+    }
+
+}
+

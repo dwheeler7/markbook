@@ -11,7 +11,7 @@ app.use((req, res, next) => {
     next()
 })
 app.use(logger('dev'))
-app.use(favicon(path.join(__dirname, 'public', 'img','logo.png')))
+app.use(favicon(path.join(__dirname, 'public', 'img','logo.svg')))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/api/bookmarks', require('./routes/api/bookmarks'))
 app.get('*', (req, res) => {
